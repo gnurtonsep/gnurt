@@ -1,0 +1,26 @@
+import { Color } from "@/utils";
+
+export const SPINNER_COLOR: { [key in Color]: string } = {
+    slate: "text-slate-600",
+    gray: "text-gray-600",
+    zinc: "text-zinc-600",
+    neutral: "text-neutral-600",
+    stone: "text-stone-600",
+    red: "text-red-600",
+    orange: "text-orange-600",
+    amber: "text-amber-600",
+    yellow: "text-yellow-600",
+    lime: "text-lime-600",
+    green: "text-green-600",
+    emerald: "text-emerald-600",
+    teal: "text-teal-600",
+    cyan: "text-cyan-600",
+    sky: "text-sky-600",
+    blue: "text-blue-600",
+    indigo: "text-indigo-600",
+    violet: "text-violet-600",
+    purple: "text-purple-600",
+    fuchsia: "text-fuchsia-600",
+    pink: "text-pink-600",
+    rose: "text-rose-600",
+};

@@ -1,77 +1,77 @@
 {
-  "name": "ui",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js",
-      "types": "./dist/index.d.ts"
+    "name": "ui",
+    "private": true,
+    "version": "1.0.1",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.umd.js",
+    "module": "dist/index.es.js",
+    "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
     },
-    "./ui.css": {
-      "import": "./dist/css/style.css"
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js",
+            "require": "./dist/index.umd.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./ui.css": {
+            "import": "./dist/css/style.css"
+        }
+    },
+    "scripts": {
+        "build": "tsc && vite build",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "preview": "vite preview",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gnurtonsep/gnurt.git",
+        "directory": "ui"
+    },
+    "dependencies": {
+        "@chromatic-com/storybook": "^2.0.2",
+        "@rollup/plugin-alias": "^5.1.1",
+        "@storybook/addon-essentials": "^8.3.3",
+        "@storybook/addon-interactions": "^8.3.3",
+        "@storybook/addon-links": "^8.3.3",
+        "@storybook/addon-onboarding": "^8.3.3",
+        "@storybook/blocks": "^8.3.3",
+        "@storybook/react": "^8.3.3",
+        "@storybook/react-vite": "^8.3.3",
+        "@storybook/test": "^8.3.3",
+        "@types/node": "^22.7.2",
+        "@typescript-eslint/eslint-plugin": "^8.7.0",
+        "@typescript-eslint/parser": "^8.7.0",
+        "autoprefixer": "^10.4.20",
+        "eslint-plugin-storybook": "^0.8.0",
+        "framer-motion": "^11.7.0",
+        "path": "^0.12.7",
+        "postcss": "^8.4.47",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "storybook": "^8.3.3",
+        "tailwind-merge": "^2.5.2",
+        "tailwindcss": "^3.4.13",
+        "vite-plugin-dts": "^4.2.2",
+        "vite-tsconfig-paths": "^5.0.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.9.0",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react-swc": "^3.5.0",
+        "eslint": "^9.9.0",
+        "eslint-plugin-react-hooks": "^4.6.2",
+        "eslint-plugin-react-refresh": "^0.4.12",
+        "globals": "^15.9.0",
+        "typescript": "^5.5.3",
+        "typescript-eslint": "^8.0.1",
+        "vite": "^5.4.1"
     }
-  },
-  "scripts": {
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gnurtonsep/gnurt.git",
-    "directory": "ui"
-  },
-  "dependencies": {
-    "@chromatic-com/storybook": "^2.0.2",
-    "@rollup/plugin-alias": "^5.1.1",
-    "@storybook/addon-essentials": "^8.3.3",
-    "@storybook/addon-interactions": "^8.3.3",
-    "@storybook/addon-links": "^8.3.3",
-    "@storybook/addon-onboarding": "^8.3.3",
-    "@storybook/blocks": "^8.3.3",
-    "@storybook/react": "^8.3.3",
-    "@storybook/react-vite": "^8.3.3",
-    "@storybook/test": "^8.3.3",
-    "@types/node": "^22.7.2",
-    "@typescript-eslint/eslint-plugin": "^8.7.0",
-    "@typescript-eslint/parser": "^8.7.0",
-    "autoprefixer": "^10.4.20",
-    "eslint-plugin-storybook": "^0.8.0",
-    "framer-motion": "^11.7.0",
-    "path": "^0.12.7",
-    "postcss": "^8.4.47",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "storybook": "^8.3.3",
-    "tailwind-merge": "^2.5.2",
-    "tailwindcss": "^3.4.13",
-    "vite-plugin-dts": "^4.2.2",
-    "vite-tsconfig-paths": "^5.0.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.9.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^9.9.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.12",
-    "globals": "^15.9.0",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
-  }
 }
