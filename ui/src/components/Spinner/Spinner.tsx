@@ -13,6 +13,7 @@ type SpinnerDirection = "row" | "col";
 type SpinnerSize = "sm" | "base" | "md" | "lg";
 
 type SpinnerProps = {
+    className?: string;
     label?: string;
     size?: SpinnerSize;
     direction?: SpinnerDirection;
@@ -294,35 +295,35 @@ const generateSpinnerSize = (size: SpinnerSize) => {
         case "lg":
             return "w-8 h-8";
         default:
-            return "w-5 h-5";
+            return "w-8 h-8";
     }
 };
 
 const Spinner = ({
     color = "gray",
+    className,
     direction = "col",
     label,
     size = "base",
 }: SpinnerProps) => {
     return (
-        <div data-slot="base">
-            <div
-                data-slot="wrapper"
-                className={twMerge(
-                    "inline-flex gap-1 justify-center items-center",
-                    generateSpinnerColor(color),
-                    generateSpinnerDirection(direction)
-                )}
-            >
-                <div data-slot="icon-wrapper">
-                    <SpinnerIcon className={generateSpinnerSize(size)} />
-                </div>
-                {label && (
-                    <div data-slot="label-wrapper">
-                        <p data-text={size}>{label}</p>
-                    </div>
-                )}
+        <div
+            data-slot="wrapper"
+            className={twMerge(
+                "inline-flex gap-1 justify-center items-center",
+                generateSpinnerColor(color),
+                generateSpinnerDirection(direction),
+                className
+            )}
+        >
+            <div data-slot="icon-wrapper">
+                <SpinnerIcon className={generateSpinnerSize(size)} />
             </div>
+            {label && (
+                <div data-slot="label-wrapper">
+                    <p data-text={size}>{label}</p>
+                </div>
+            )}
         </div>
     );
 };

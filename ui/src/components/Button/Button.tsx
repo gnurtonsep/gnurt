@@ -1,13 +1,17 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Color, FontSize } from "@/utils";
 
 import {
     BUTTON_CONTAINED_COLOR,
+    BUTTON_CONTAINED_ICON_COLOR,
     BUTTON_LIGHT_COLOR,
+    BUTTON_LIGHT_ICON_COLOR,
     BUTTON_OUTLINED_COLOR,
+    BUTTON_OUTLINED_ICON_COLOR,
 } from "./styles";
+import { Spinner } from "../Spinner";
 
 /**
  * ========== Define type ==========
@@ -32,6 +36,7 @@ type ButtonProps = ComponentProps<"button"> & {
     textTransform?: ButtonTextTransform;
 
     /* Loading state */
+    spinner?: ReactNode;
     isLoading?: boolean;
     textIsLoading?: string;
 };
@@ -66,6 +71,19 @@ const generateButtonColor = (variant: ButtonVariant, color: Color) => {
     }
 };
 
+const generateButtonIconColor = (variant: ButtonVariant, color: Color) => {
+    switch (variant) {
+        case "contained":
+            return BUTTON_CONTAINED_ICON_COLOR[color];
+        case "light":
+            return BUTTON_LIGHT_ICON_COLOR[color];
+        case "outlined":
+            return BUTTON_OUTLINED_ICON_COLOR[color];
+        default:
+            return BUTTON_CONTAINED_ICON_COLOR[color];
+    }
+};
+
 const Button = ({
     className,
     variant = "contained",
@@ -87,11 +105,11 @@ const Button = ({
         <button
             {...props}
             className={twMerge(
-                "inline-flex items-center justify-center gap-2 appearance-none outline-none transition-all",
+                "inline-flex items-center justify-center gap-2 appearance-none outline-none transition-all cursor-pointer",
                 generateButtonTextTransform(textTransform),
                 generateButtonColor(variant, color),
                 "px-4 py-2 font-medium leading-none",
-                "data-[pressed=true]:scale-90 rounded-lg",
+                "data-[pressed=true]:scale-90 data-[disable=true]:opacity-90 data-[disable=true]:cursor-not-allowed rounded-xl",
                 fullWidth ? "w-full" : "",
                 "group",
                 className
@@ -114,6 +132,12 @@ const Button = ({
                 props.onMouseLeave?.(e);
             }}
         >
+            {isLoading && (
+                <Spinner
+                    size="sm"
+                    className={generateButtonIconColor(variant, color)}
+                />
+            )}
             <span>{isLoading ? `${textIsLoading}...` : text}</span>
         </button>
     );
