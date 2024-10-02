@@ -4,3 +4,5 @@ export type Range<
 > = Result["length"] extends N
     ? Result[number] | N
     : Range<N, [...Result, Result["length"]]>;
+
+export type UnknownObject = Record<string, unknown>;
