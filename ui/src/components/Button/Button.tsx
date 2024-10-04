@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, useState } from "react";
+import { ComponentProps, forwardRef, ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Color, FontSize } from "@/utils";
@@ -84,63 +84,69 @@ const generateButtonIconColor = (variant: ButtonVariant, color: Color) => {
     }
 };
 
-const Button = ({
-    className,
-    variant = "contained",
-    size = "base",
-    color = "gray",
-    fullWidth,
-    text,
-    textTransform = "first-uppercase",
-    isLoading,
-    textIsLoading = "Loading",
-    ...props
-}: ButtonProps) => {
-    /**
-     * State variable
-     */
-    const [isPressed, setIsPressed] = useState<boolean | undefined>();
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+    (
+        {
+            className,
+            variant = "contained",
+            size = "base",
+            color = "gray",
+            fullWidth,
+            text,
+            textTransform = "first-uppercase",
+            isLoading,
+            textIsLoading = "Loading",
+            ...props
+        },
+        ref
+    ) => {
+        /**
+         * State variable
+         */
+        const [isPressed, setIsPressed] = useState<boolean | undefined>();
 
-    return (
-        <button
-            {...props}
-            className={twMerge(
-                "inline-flex items-center justify-center gap-2 appearance-none outline-none transition-all cursor-pointer",
-                generateButtonTextTransform(textTransform),
-                generateButtonColor(variant, color),
-                "px-4 py-2 font-medium leading-none",
-                "data-[pressed=true]:scale-90 data-[disable=true]:opacity-90 data-[disable=true]:cursor-not-allowed rounded-xl",
-                fullWidth ? "w-full" : "",
-                "group",
-                className
-            )}
-            disabled={(isLoading ? isLoading : undefined) || props.disabled}
-            data-disable={isLoading ? isLoading : undefined}
-            data-loading={isLoading ? isLoading : undefined}
-            data-text={size}
-            data-pressed={isPressed}
-            onMouseDown={(e) => {
-                setIsPressed(true);
-                props.onMouseDown?.(e);
-            }}
-            onMouseUp={(e) => {
-                setIsPressed(false);
-                props.onMouseUp?.(e);
-            }}
-            onMouseLeave={(e) => {
-                setIsPressed(false);
-                props.onMouseLeave?.(e);
-            }}
-        >
-            {isLoading && (
-                <Spinner
-                    size="sm"
-                    className={generateButtonIconColor(variant, color)}
-                />
-            )}
-            <span>{isLoading ? `${textIsLoading}...` : text}</span>
-        </button>
-    );
-};
+        return (
+            <button
+                {...props}
+                className={twMerge(
+                    "inline-flex items-center justify-center gap-2 appearance-none outline-none transition-all cursor-pointer",
+                    generateButtonTextTransform(textTransform),
+                    generateButtonColor(variant, color),
+                    "px-4 py-2 font-medium leading-none",
+                    "data-[pressed=true]:scale-90 data-[disable=true]:opacity-90 data-[disable=true]:cursor-not-allowed rounded-xl",
+                    fullWidth ? "w-full" : "",
+                    "group",
+                    className
+                )}
+                disabled={(isLoading ? isLoading : undefined) || props.disabled}
+                data-disable={isLoading ? isLoading : undefined}
+                data-loading={isLoading ? isLoading : undefined}
+                data-text={size}
+                data-pressed={isPressed}
+                onMouseDown={(e) => {
+                    setIsPressed(true);
+                    props.onMouseDown?.(e);
+                }}
+                onMouseUp={(e) => {
+                    setIsPressed(false);
+                    props.onMouseUp?.(e);
+                }}
+                onMouseLeave={(e) => {
+                    setIsPressed(false);
+                    props.onMouseLeave?.(e);
+                }}
+                ref={ref}
+            >
+                {isLoading && (
+                    <Spinner
+                        size="sm"
+                        className={generateButtonIconColor(variant, color)}
+                    />
+                )}
+                <span>{isLoading ? `${textIsLoading}...` : text}</span>
+            </button>
+        );
+    }
+);
 
 export default Button;

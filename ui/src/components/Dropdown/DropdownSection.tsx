@@ -7,19 +7,25 @@ import { twMerge } from "tailwind-merge";
 type DropdownSectionProps = {
     title: string;
     children: ReactNode;
+    className?: string;
 };
 
-const DropdownSection = ({ children, title }: DropdownSectionProps) => {
+const DropdownSection = ({
+    children,
+    title,
+    className,
+}: DropdownSectionProps) => {
     return (
-        <div className={twMerge("space-y-1")}>
+        <div data-slots="section" className={twMerge("space-y-1", className)}>
             <span
                 className={twMerge(
-                    "block first-letter:uppercase font-medium text-xs"
+                    "block first-letter:uppercase font-medium text-xs",
+                    "focus:outline-1 focus:outline-gray-500"
                 )}
             >
                 {title}
             </span>
-            <ul>{children}</ul>
+            {children}
         </div>
     );
 };

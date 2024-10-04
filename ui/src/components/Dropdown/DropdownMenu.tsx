@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
 /**
  * ========== Define type ==========
@@ -9,26 +9,11 @@ type DropdownMenuProps = {
     children: ReactNode;
 };
 
-const DropdownMenu = ({ children }: DropdownMenuProps) => {
+const DropdownMenu = ({ children, className }: DropdownMenuProps) => {
     return (
-        <motion.div
-            data-slot="base"
-            initial={{
-                opacity: 0,
-                scaleY: 0,
-            }}
-            animate={{
-                opacity: 1,
-                scaleY: 1,
-            }}
-            transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 10,
-            }}
-        >
+        <ul data-slots="menu" className={twMerge("", className)} tabIndex={-1}>
             {children}
-        </motion.div>
+        </ul>
     );
 };
 
